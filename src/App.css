@@ -1,0 +1,99 @@
+
+.square {
+  aspect-ratio: 1/ 1;
+  display: flex;
+  align-items: center;
+  padding: 5%;
+  background-color: #1E1E1E;
+  color: #fff;
+  
+}
+
+.rect {
+  aspect-ratio: 2/ 1;
+  display: flex;
+  align-items: center;
+  padding: 5%;
+  background-color: #1E1E1E;
+  color: #fff;
+}
+
+.grid {
+height:100%;
+width:50%;
+}
+
+.col {
+  padding: 0; 
+  margin: 0;
+}
+
+.col-sm-3 {
+  padding: 0; 
+  margin: 0;
+}
+
+.btn-Primary {
+  width:100%;
+  height: 100%;
+  font-size: 5vw ;
+  border-radius: 50%;
+  background-color: grey;
+  color: white;
+  &:hover {
+    background-color: grey;
+    color: white;
+  }
+  &:focus {
+    background-color: grey;
+    color: white;
+  }
+  &.active {
+    &:hover {
+      background-color: grey;
+      color: white;
+    }
+    &:focus {
+      background-color: grey;
+      color: white;
+    }
+  }
+}
+
+.btn-Secondary {
+  width:100%;
+  height: 100%;
+  font-size: 5vw ;
+  border-radius: 50%;
+  background-color: orange;
+  color: white;
+  &:hover {
+    background-color: orange;
+    color: white;
+  }
+  &:focus {
+    background-color: orange;
+    color: white;
+  }
+  &.active {
+    &:hover {
+      background-color: orange;
+      color: white;
+    }
+    &:focus {
+      background-color: orange;
+      color: white;
+    }
+  }
+}
+
+
+.display{
+  aspect-ratio: 4/ 1;
+  display: flex;
+  font-size: 5vw ;
+  align-items: center;
+  padding: 5%;
+  background-color: #1E1E1E;
+  color: #fff;
+}
