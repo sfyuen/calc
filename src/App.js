@@ -14,7 +14,7 @@ function App() {
 
   function digClick(i) {
     if (deci) {
-      setcurNum(curNum.plus(new Decimal(i).dividedBy(Math.pow(10, dp))));
+      setcurNum(curNum.plus(Decimal(i).dividedBy(Decimal(10).toPower(dp))));
       setdp(dp + 1);
     } else {
       setcurNum(curNum.times(10).plus(i));
@@ -38,11 +38,16 @@ function App() {
       </Button>
     );
   }
-  let tmp = curNum.toString();
+
+  var res = curNum.toFixed(dp - 1);
+  if (dp == 1 && deci) {
+    res += ".";
+  }
+
   return (
     <Container>
       <Row>
-        <div className="display">{tmp}</div>
+        <div className="display">{res}</div>
       </Row>
       <Row>
         <Col sm={3}>
