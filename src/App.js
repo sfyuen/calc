@@ -114,7 +114,7 @@ function App() {
     return button;
   }
 
-  var res = curNum.toFixed(dp - 1) + "a" + preNum.toFixed(0);
+  var res = curNum.toFixed(dp - 1);
   if (dp === 1 && deci && res.length < 12) {
     res += ".";
   }
