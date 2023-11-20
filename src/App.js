@@ -13,31 +13,50 @@ function App() {
   const [deci, setdeci] = useState(false);
   const [dp, setdp] = useState(1);
   const [cState, setcState] = useState("AC");
+  const [cSign, setcSign] = useState("");
+  const [signFlag, setsignFlag] = useState(false);
+  const [iFlag, setiFlag] = useState(false);
 
   function digClick(i) {
-    if (curNum.toFixed(dp).length < 14) {
+    var di = curNum;
+    if (signFlag) {
+      di = new Decimal(0);
+    }
+    if (di.toFixed(dp).length < 14) {
       if (deci) {
-        setcurNum(curNum.plus(Decimal(i).dividedBy(Decimal(10).toPower(dp))));
+        setcurNum(di.plus(Decimal(i).dividedBy(Decimal(10).toPower(dp))));
         setdp(dp + 1);
       } else {
-        setcurNum(curNum.times(10).plus(i));
+        setcurNum(di.times(10).plus(i));
       }
-      if (i != 0) {
+      if (i !== 0) {
         setcState("C");
       }
+      setsignFlag(false);
     }
   }
 
   function deciClick() {
     setdeci(true);
     setcState("C");
+    setpreNum(curNum);
   }
 
   function acClick() {
     setdeci(false);
     setcurNum(new Decimal(0));
     setdp(1);
-    setcState("AC");
+    if (cState === "C") {
+      setcState("AC");
+      if (!iFlag) {
+        setsignFlag(true);
+      }
+    } else {
+      setsignFlag(false);
+      setcSign("");
+      setpreNum(new Decimal(0));
+      setiFlag(false);
+    }
   }
 
   function DigButton({ children }) {
@@ -48,8 +67,55 @@ function App() {
     );
   }
 
-  var res = curNum.toFixed(dp - 1);
-  if (dp == 1 && deci && res.length < 12) {
+  const eqClick = () => {
+    if (cSign === "+") {
+      if (!iFlag) {
+        setiFlag(true);
+        setcurNum(preNum.plus(curNum));
+        setpreNum(curNum);
+      } else {
+        setcurNum(curNum.plus(preNum));
+      }
+    }
+    if (cSign === "-") {
+      if (!iFlag) {
+        setiFlag(true);
+        setcurNum(preNum.minus(curNum));
+        setpreNum(curNum);
+      } else {
+        setcurNum(curNum.minus(preNum));
+      }
+    }
+    setsignFlag(false);
+  };
+
+  function signClick({ children }) {
+    if (children !== cSign && !signFlag) {
+      eqClick();
+    }
+    setcSign(children);
+    setsignFlag(true);
+    setpreNum(curNum);
+  }
+
+  function SignButton({ children }) {
+    var button = (
+      <Button variant="Secondary" onClick={() => signClick({ children })}>
+        {children}
+      </Button>
+    );
+    if (signFlag && children === cSign) {
+      button = (
+        <Button variant="Success" onClick={() => signClick({ children })}>
+          {children}
+        </Button>
+      );
+    }
+    return button;
+  }
+
+  var res = curNum.toFixed(dp - 1) + "a" + preNum.toFixed(0);
+  if (dp === 1 && deci && res.length < 12) {
     res += ".";
   }
 
@@ -68,17 +134,17 @@ function App() {
         </Col>
         <Col className="col-3">
           <div className="square">
-            <Button variant="Secondary">÷</Button>
+            <SignButton>÷</SignButton>
           </div>
         </Col>
         <Col className="col-3">
           <div className="square">
-            <Button variant="Secondary">×</Button>
+            <SignButton>×</SignButton>
           </div>
         </Col>
         <Col className="col-3">
           <div className="square">
-            <Button variant="Secondary">−</Button>
+            <SignButton>-</SignButton>
           </div>
         </Col>
       </Row>
@@ -121,7 +187,7 @@ function App() {
         </Col>
         <Col className="col-3">
           <div className="hrect">
-            <Button variant="Secondary">+</Button>
+            <SignButton>+</SignButton>
           </div>
         </Col>
       </Row>
@@ -161,7 +227,9 @@ function App() {
         </Col>
         <Col className="col-3">
           <div className="hrect">
-            <Button variant="Secondary">=</Button>
+            <Button variant="Secondary" onClick={eqClick}>
+              =
+            </Button>
           </div>
         </Col>
       </Row>
