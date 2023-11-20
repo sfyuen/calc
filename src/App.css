@@ -41,7 +41,7 @@ div[class*=" col-"],
 .btn-Primary {
   width: 100%;
   height: 100%;
-  font-size: 5vh;
+  font-size: 100%;
   border-radius: 50%;
   background-color: DimGray;
   color: white;
@@ -68,7 +68,7 @@ div[class*=" col-"],
 .btn-Secondary {
   width: 100%;
   height: 100%;
-  font-size: 5vh;
+  font-size: 100%;
   border-radius: 50%;
   background-color: orange;
   color: white;
@@ -95,7 +95,7 @@ div[class*=" col-"],
 .btn-Info {
   width: 100%;
   height: 100%;
-  font-size: 5vh;
+  font-size: 100%;
   border-radius: 50%;
   background-color: grey;
   color: black;
@@ -122,7 +122,7 @@ div[class*=" col-"],
 .display {
   aspect-ratio: 2/ 1;
   display: flex;
-  font-size: 8vh;
+  font-size: 200%;
   align-items: center;
   justify-content: end;
   padding: 5%;
