@@ -26,11 +26,11 @@
 }
 
 .container {
-  height: 100%;
-  width: 50%;
+  max-width: calc(4 / 7 * 100vh);
+  padding: 0;
 }
 
-[class^="col-"],
+div[class^="col-"],
 div[class*=" col-"],
 .col,
 .row {
@@ -41,7 +41,7 @@ div[class*=" col-"],
 .btn-Primary {
   width: 100%;
   height: 100%;
-  font-size: 5vw;
+  font-size: 5vh;
   border-radius: 50%;
   background-color: DimGray;
   color: white;
@@ -68,7 +68,7 @@ div[class*=" col-"],
 .btn-Secondary {
   width: 100%;
   height: 100%;
-  font-size: 5vw;
+  font-size: 5vh;
   border-radius: 50%;
   background-color: orange;
   color: white;
@@ -95,7 +95,7 @@ div[class*=" col-"],
 .btn-Info {
   width: 100%;
   height: 100%;
-  font-size: 5vw;
+  font-size: 5vh;
   border-radius: 50%;
   background-color: grey;
   color: black;
@@ -120,9 +120,9 @@ div[class*=" col-"],
 }
 
 .display {
-  aspect-ratio: 4/ 1;
+  aspect-ratio: 2/ 1;
   display: flex;
-  font-size: 5vw;
+  font-size: 5vh;
   align-items: center;
   justify-content: end;
   padding: 5%;
