@@ -11,6 +11,7 @@ function App() {
   const [curNum, setcurNum] = useState(new Decimal(0));
   const [deci, setdeci] = useState(false);
   const [dp, setdp] = useState(1);
+  const [cState, setcState] = useState("AC");
 
   function digClick(i) {
     if (curNum.toFixed(dp).length < 14) {
@@ -55,7 +56,7 @@ function App() {
         <Col sm={3}>
           <div className="square">
             <Button variant="Info" onClick={() => acClick()}>
-              AC
+              {cState}
             </Button>
           </div>
         </Col>
