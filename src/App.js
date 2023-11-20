@@ -4,32 +4,67 @@ import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import "./App.css";
+import { useState } from "react";
+import Decimal from "decimal.js";
 
 function App() {
+  const [curNum, setcurNum] = useState(new Decimal(0));
+  const [deci, setdeci] = useState(false);
+  const [dp, setdp] = useState(1);
+
+  function digClick(i) {
+    if (deci) {
+      setcurNum(curNum.plus(new Decimal(i).dividedBy(Math.pow(10, dp))));
+      setdp(dp + 1);
+    } else {
+      setcurNum(curNum.times(10).plus(i));
+    }
+  }
+
+  function deciClick() {
+    setdeci(true);
+  }
+
+  function acClick() {
+    setdeci(false);
+    setcurNum(new Decimal(0));
+    setdp(1);
+  }
+
+  function DigButton({ children }) {
+    return (
+      <Button variant="Primary" onClick={() => digClick(children)}>
+        {children}
+      </Button>
+    );
+  }
+  let tmp = curNum.toString();
   return (
     <Container>
       <Row>
-        <div className="display">0</div>
+        <div className="display">{tmp}</div>
       </Row>
       <Row>
         <Col sm={3}>
           <div className="square">
-            <Button variant="Info">C</Button>{" "}
+            <Button variant="Info" onClick={() => acClick()}>
+              AC
+            </Button>
           </div>
         </Col>
         <Col sm={3}>
           <div className="square">
-            <Button variant="Secondary">÷</Button>{" "}
+            <Button variant="Secondary">÷</Button>
           </div>
         </Col>
         <Col sm={3}>
           <div className="square">
-            <Button variant="Secondary">×</Button>{" "}
+            <Button variant="Secondary">×</Button>
           </div>
         </Col>
         <Col sm={3}>
           <div className="square">
-            <Button variant="Secondary">−</Button>{" "}
+            <Button variant="Secondary">−</Button>
           </div>
         </Col>
       </Row>
@@ -38,41 +73,41 @@ function App() {
           <Row>
             <Col sm={4}>
               <div className="square">
-                <Button variant="Primary">7</Button>{" "}
+                <DigButton>{7}</DigButton>
               </div>
             </Col>
             <Col sm={4}>
               <div className="square">
-                <Button variant="Primary">8</Button>{" "}
+                <DigButton>{8}</DigButton>
               </div>
             </Col>
             <Col sm={4}>
               <div className="square">
-                <Button variant="Primary">9</Button>{" "}
+                <DigButton>{9}</DigButton>
               </div>
             </Col>
           </Row>
           <Row>
             <Col sm={4}>
               <div className="square">
-                <Button variant="Primary">4</Button>{" "}
+                <DigButton>{4}</DigButton>
               </div>
             </Col>
             <Col sm={4}>
               <div className="square">
-                <Button variant="Primary">5</Button>{" "}
+                <DigButton>{5}</DigButton>
               </div>
             </Col>
             <Col sm={4}>
               <div className="square">
-                <Button variant="Primary">6</Button>{" "}
+                <DigButton>{6}</DigButton>
               </div>
             </Col>
           </Row>
         </Col>
         <Col sm={3}>
           <div className="hrect">
-            <Button variant="Secondary">+</Button>{" "}
+            <Button variant="Secondary">+</Button>
           </div>
         </Col>
       </Row>
@@ -81,36 +116,38 @@ function App() {
           <Row>
             <Col sm={4}>
               <div className="square">
-                <Button variant="Primary">1</Button>{" "}
+                <DigButton>{1}</DigButton>
               </div>
             </Col>
             <Col sm={4}>
               <div className="square">
-                <Button variant="Primary">2</Button>{" "}
+                <DigButton>{2}</DigButton>
               </div>
             </Col>
             <Col sm={4}>
               <div className="square">
-                <Button variant="Primary">3</Button>{" "}
+                <DigButton>{3}</DigButton>
               </div>
             </Col>
           </Row>
           <Row>
             <Col sm={8}>
               <div className="vrect">
-                <Button variant="Primary">0</Button>{" "}
+                <DigButton>{0}</DigButton>
               </div>
             </Col>
             <Col sm={4}>
               <div className="square">
-                <Button variant="Primary">.</Button>{" "}
+                <Button variant="Primary" onClick={deciClick}>
+                  .
+                </Button>
               </div>
             </Col>
           </Row>
         </Col>
         <Col sm={3}>
           <div className="hrect">
-            <Button variant="Secondary">=</Button>{" "}
+            <Button variant="Secondary">=</Button>
           </div>
         </Col>
       </Row>
