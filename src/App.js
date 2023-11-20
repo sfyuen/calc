@@ -13,11 +13,13 @@ function App() {
   const [dp, setdp] = useState(1);
 
   function digClick(i) {
-    if (deci) {
-      setcurNum(curNum.plus(Decimal(i).dividedBy(Decimal(10).toPower(dp))));
-      setdp(dp + 1);
-    } else {
-      setcurNum(curNum.times(10).plus(i));
+    if (curNum.toFixed(dp).length < 14) {
+      if (deci) {
+        setcurNum(curNum.plus(Decimal(i).dividedBy(Decimal(10).toPower(dp))));
+        setdp(dp + 1);
+      } else {
+        setcurNum(curNum.times(10).plus(i));
+      }
     }
   }
 
