@@ -32,6 +32,7 @@ function App() {
     setdeci(false);
     setcurNum(new Decimal(0));
     setdp(1);
+    setcState("AC");
   }
 
   function DigButton({ children }) {
@@ -43,7 +44,7 @@ function App() {
   }
 
   var res = curNum.toFixed(dp - 1);
-  if (dp == 1 && deci) {
+  if (dp == 1 && deci && res < 13) {
     res += ".";
   }
 
